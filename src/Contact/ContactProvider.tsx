@@ -31,7 +31,7 @@ function ContactProvider(){
     const [contacts, setContacts] = useState(initContacts);
     const addContact = (contact: IContact) => setContacts((prevContacts) => {
         if (!ValidateContact(contact)) {
-
+            return prevContacts
         }
         let newId = prevContacts.reduce((newId, contact) => contact.id >= newId ? contact.id+1 : newId , 0);
         return [
@@ -42,6 +42,7 @@ function ContactProvider(){
                 email: contact.email
             }]
         });
+        
     const contextValue = {contacts: contacts, addContact: addContact} 
 
     return(

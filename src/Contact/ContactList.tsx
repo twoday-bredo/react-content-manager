@@ -31,6 +31,7 @@ function ContactList() {
                 </div>
             </div>
 
+            <h1>Contacts</h1>
             <ul className='list'>
                 {ctx.contacts.map((contact) => <ContactInfo id={contact.id} name={contact.name} phone={contact.phone} email={contact.email}></ContactInfo>)}
             </ul>
