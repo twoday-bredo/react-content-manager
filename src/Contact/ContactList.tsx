@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { ContactContext } from './ContactProvider';
 import { ContactInfo } from './ContactInfo';
 import { IContact } from './IContact';
+import { useContactsContext, useContactsDispatch } from './ContactContext';
+import { ContactActionTypes } from './ContactReducer';
 
 
 function ContactList() {
@@ -9,7 +10,10 @@ function ContactList() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
 
-    let ctx = useContext(ContactContext);
+    const contacts = useContactsContext();
+    const contactDispatch = useContactsDispatch();
+
+
     return (
         <div className='center'>
             <div>
@@ -27,13 +31,13 @@ function ContactList() {
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <div>
-                    <button onClick={() => ctx.addContact({id: 0, name: name, email: email})}>Add</button>
+                    <button onClick={() => contactDispatch({type: ContactActionTypes.Add, name: name, email: email})}>Add</button>
                 </div>
             </div>
 
             <h1>Contacts</h1>
             <ul className='list'>
-                {ctx.contacts.map((contact) => <ContactInfo id={contact.id} name={contact.name} phone={contact.phone} email={contact.email}></ContactInfo>)}
+                {contacts.map((contact) => <ContactInfo id={contact.id} name={contact.name} phone={contact.phone} email={contact.email}></ContactInfo>)}
             </ul>
         </div>
     )

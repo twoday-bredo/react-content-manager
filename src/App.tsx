@@ -2,7 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ContactProvider from './Contact/ContactProvider';
+import {ContactProvider } from './Contact/ContactContext';
+import ContactList from './Contact/ContactList';
 
 function App() {
   return (
@@ -11,9 +12,12 @@ function App() {
         {/* <link >
         </link> */}
       </nav>
-      <Routes>
-        <Route path='/' element={<ContactProvider/>} />
-      </Routes>
+      <ContactProvider>
+        <Routes>
+          <Route path='/' element={<ContactList/>} />
+        </Routes>
+      </ContactProvider>
+      
     </BrowserRouter>
   );
 }
